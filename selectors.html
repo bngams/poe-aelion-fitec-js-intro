@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <title>Exercice sur les selecteurs JS/jQuery</title>
+  </head>
+
+  <body>
+    <p id="contenu">
+      La couleur <span class="vert">verte</span> est jolie,
+      <span class="titre2"> surtout en titre2</span>,
+      <a href="#">ou en lien href</a>. <span class="rouge">Le rouge</span> est
+      pas mal aussi
+      <span class="orange">mais le orange me plait bien</span> surtout,
+      <span class="titre2">en titre2 </span> vous êtes d'accord avec moi ?<span
+        class="gras"
+        >On peut aussi écrire en gras
+      </span>
+      et même en <span class="titre1">gros comme dans ce titre1</span>.
+      L'écriture <span class="souligne">en souligné</span>, ou en
+      <span class="barre">barré</span> est aussi possible en html.
+      <span class="souligne">Le souligné </span>
+      <span class="bleu"> ou le bleu</span>
+      <span class="gras"> et le gras</span>. sont sympas,
+      <span class="italique"> mais l'italique</span> est pratique,
+      <span class="barre"> tout comme le barré</span> surtout quand on colorie,
+      <span class="vert"> en vert</span> le texte.
+      <span class="italique">L'italique</span> est très joli comme style.
+      <span> Ici j'ai un span html sans rien</span> et là le même
+      <span class="vert">de la classe vert</span> ici
+      <a href="#">j'ai un lien a</a>, que j'aimerais bien transformer en bouton.
+      <span class="vert">Le vert</span> peut aussi egayer les pages.
+      <span class="titre1">J'aimerais devenir un titre 1</span> moi. Et ce texte
+      <span class="vert">deviendra vert</span> lorsqu'on cliquera sur le bon
+      bouton <a href="#">de même que ce lien deviendra un bouton</a> si on
+      clique au bon endroit
+      <span class="bleu">quand à ce texte il deviendra bleu</span>. Pourquoi ne
+      pas, <span class="souligne">souligner</span> le fait que,
+      <span class="vert">le vert</span> est la couleur de la nature. Et que le
+      <span class="bleu">bleu celui du ciel</span>.
+      <span class="souligne">Je souligne le fait que le lien qui suit</span>
+      doit devenir un <a href="#">bouton.</a> Le vert aimerais devenir très
+      présent <span class="vert">dans ce texte</span>,
+      <span class="bleu">mais moins que le bleu </span>. Allez,
+      <span class="italique">faites que cela </span>
+      <span class="rouge">fonctionne.</span>
+    </p>
+    <button onclick="javascript:semantique()">
+      Faire apparaitre le gras, l'italique et le souligné au bons endroits
+    </button>
+    <br />
+    <button onclick="colorer()">Colorer le texte</button> <br />
+    <button onclick="mettreTitres()">Mettre des titres</button> <br />
+    <button onclick="liensEnBoutons()">Transformer les liens en boutons</button>
+    <br />
+    <button onclick="dupliquerTexte()">Dupliquer le texte</button> <br />
+    <button onclick="regrouperTitres()">Regrouper les titres</button> <br />
+    <button onclick="regrouperLiens()">Regrouper les liens</button> <br />
+    <button onclick="viderBoutons()">Vider les boutons</button> <br />
+    <button onclick="enleverLiens()">Enlever les liens</button> <br />
+    <button onclick="enleverGras()">Enlever le texte en gras</button> <br />
+    <button onclick="enleverItalique()">Enlever le texte en italique</button>
+    <br />
+    <button onclick="enleverDecor()">Enlever le texte décoré</button> <br />
+    <button onclick="voirCode()">Voir le code</button><br />
+
+    <script>
+      function semantique() {
+        // on a supprimé toutes les fonctions mettreEnGras ...
+        // car "factorisés" dans une fonction générique "appliquerStyle"
+        // mettreEnGras();
+        // mettreEnItalique();
+        // souligner();
+
+        appliquerStyle(".gras", "font-weight:bold;");
+        appliquerStyle(".italique", "font-style:italic;");
+        appliquerStyle(".souligne", "text-decoration: underline;");
+      }
+
+      function colorer() {
+        appliquerStyle(".bleu", "color: blue;");
+        appliquerStyle(".vert", "color: green;");
+        appliquerStyle(".rouge", "color: red;");
+      }
+
+      function mettreTitres() {
+        // simple quote vs double quotes vs back quotes
+        appliquerTitre(".titre1", "h1");
+        appliquerTitre(".titre2", "h2");
+      }
+
+      function dupliquerTexte() {
+        let contenu = document.querySelector("#contenu");
+        // ajouter le contenu au body
+        document.querySelector("body").innerHTML += contenu.outerHTML;
+      }
+
+      function enleverGras() {
+        supprimerStyle(".gras");
+      }
+
+      function enleverItalique() {
+        supprimerStyle(".italique");
+      }
+
+      function enleverDecor() {
+        // appeler supprimer style x fois
+        // supprimerStyle(".gras");
+        // supprimerStyle(".soulgine");
+
+        // appeler supprimer style 1 fois
+        supprimerStyle(
+          ".gras, .souligne, .italique, .vert, .bleu, .rouge, .orange"
+        );
+
+        supprimerTitre(".titre1", "h1");
+        supprimerTitre(".titre2", "h2");
+      }
+
+      function appliquerTitre(selector, tag) {
+        // selectionner tous les éléments avec le selecteur avec 'selector'
+        const elements = document.querySelectorAll(selector);
+        // appliquer le style demandé 'style'
+        for (const el of elements) {
+          // option 1 - syntaxe classique
+          // el.innerHTML =  '<' + tag + '>' +  el.innerHTML + '</' + tag + '>';
+          // option 2 - back quotes => template literals with
+          el.outerHTML = `<${tag}> ${el.outerHTML} </${tag}>`;
+        }
+      }
+
+      function supprimerTitre(selector, tag) {
+        // selectionner tous les éléments avec le selecteur avec 'selector'
+        const elements = document.querySelectorAll(tag);
+        for (const el of elements) {
+          // option 0 - exemple avec querySelector
+          // el.outerHTML = el.querySelector('.titre1').outerHTML;
+          el.outerHTML = el.innerHTML;
+        }
+      }
+
+      function appliquerStyle(selector, style) {
+        // selectionner tous les éléments avec le selecteur avec 'selector'
+        const elements = document.querySelectorAll(selector);
+        // appliquer le style demandé 'style'
+        for (const el of elements) {
+          el.style = style;
+        }
+      }
+      
+
+      function supprimerStyle(selector) {
+        appliquerStyle(selector, "");
+      }
+
+      function mettreEnGras() {
+        // font-weight: bolder;
+        // sélectionner tous les éléments avec la class 'gras'
+        const elementsBold = document.querySelectorAll(".gras");
+        // appliquer un style pour chaque élément
+        for (const el of elementsBold) {
+          el.style = "font-weight: bolder;";
+        }
+      }
+
+      function mettreEnItalique() {
+        // font-style: italic;
+        // sélectionner tous les éléments avec la class 'italique'
+        const elementsItalic = document.querySelectorAll(".italique");
+        // appliquer un style pour chaque élément
+        for (const el of elementsItalic) {
+          el.style = "font-style: italic;";
+        }
+      }
+
+      function souligner() {
+        // text-decoration: underline;
+        // sélectionner tous les éléments avec la class 'italique'
+        const elementsUnderline = document.querySelectorAll(".souligne");
+        // appliquer un style pour chaque élément
+        for (const el of elementsUnderline) {
+          el.style = "text-decoration: underline;";
+        }
+      }
+
+      function voirCode() {
+        showSource();
+      }
+
+      function showSource() {
+        let source = document.querySelector("html").outerHTML;
+        //now we need to escape the html special chars, javascript has escape
+        //but this does not do what we want
+        source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        //now we add <pre> tags to preserve whitespace
+        source = "<pre>" + source + "</pre>";
+        //now open the window and set the source as the content
+        const sourceWindow = window.open(
+          "",
+          "Source of page",
+          "height=800,width=800,scrollbars=1,resizable=1"
+        );
+        sourceWindow.document.write(source);
+        sourceWindow.document.close(); //close the document for writing, not the window
+        //give source window focus
+        if (window.focus) sourceWindow.focus();
+      }
+    </script>
+  </body>
+</html>

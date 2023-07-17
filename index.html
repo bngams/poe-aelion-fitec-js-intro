@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Hello world!!!</h1>
+    <ul id="list">
+      <li class="list-item">Text list item</li>
+      <li class="list-item">Text list item</li>
+      <li class="list-item">Text list item</li>
+    </ul>
+    <button class="clickable" onclick="javascript:alert('click!')">
+      Click me!
+    </button>
+    <h2 class="clickable" ondblclick="javascript:alert('dbl click!')">
+      Dbl click me!
+    </h2>
+
+    <script>
+      // variables & types
+      let myString = "String"; // typeof myString => string
+      let myNumber = 10; // typeof myNumber => 'number'
+      let myBoolean = true; // typeof myBoolean => boolean
+      let myArray = [1, 2, 3];
+
+      // instructions de programmation
+      let result = myNumber + 10;
+      let resultBehindTheScene = 10 + 10;
+      let concatenation = myString + " other word";
+
+      // fonctions toutes prêtes
+      // fonctions existantes
+      // <=> API JS (API javascript)
+      // alert('')
+      console.log(myString);
+      console.log("String");
+      console.log("Some value");
+
+      // créer ses propres fonctions
+      // plusieurs syntaxes (plusieurs façons de faire)
+      function myFunction() {
+        console.log("instruction 1");
+        console.log("instruction 2");
+        console.log("...");
+      }
+
+      // fonction avec deux paramètres
+      function myFunctionWithParams(param1, param2) {
+        console.log(param1);
+        console.log(param2);
+        console.log("...");
+      }
+
+      // fonction avec un nombre indéfini de paramètres
+      function myFunctionWithXParams(...xparams) {
+        console.log(xparams);
+        console.log("...");
+      }
+
+      // fonction qui renvoie un résultat
+      function addition(a, b) {
+        // additionne a + b et stocke dans la variable result
+        let result = a + b;
+        // affiche le resultat
+        console.log(result);
+        // renvoie le résultat
+        return result;
+      }
+
+      // fonction qui renvoie un résultat
+      function additionRefactor(a, b) {
+        return a + b;
+      }
+
+      // appeler la fonction
+      let resultAddition1 = additionRefactor(2, 3);
+
+      // 1 fonction en js = 1 variable qui contient une fonction
+      // functions arrow functions
+      let additionFunction = (a, b) => {
+        return a + b;
+      }
+
+      let resultAddition2 = additionFunction(2, 3);
+
+      // typeof additionRefactor => function
+      // typeof additionFunction => function
+
+
+      // let myNumberA = 10;
+      // typeof myNumberA; // 'number'
+
+      // typeof myNumberA == 'number' // true
+
+      // let myStringA = 'String A'
+      // typeof myStringA == 'number' // false
+
+      let additionFunctionWithInstructions = (a, b) => {
+        // si a n'est pas un nombre ou si b n'est pas un nombre
+        // structures de controles / comparaisons / conditions ...
+        if(typeof a != 'number' || typeof b != 'number') { // if(true) 
+          // alors renvoie 0
+          return 0;
+        } else {
+          // sinon renvoi le resultat de a + b
+          return a + b;
+        }   
+      }
+      additionFunctionWithInstructions(1,2);
+      additionFunctionWithInstructions(1,'String');
+
+
+      // les objets
+      // typeof console => 'object'
+      let calculator = {
+        add: (a, b) => { return a + b } 
+      }
+
+      // plusieurs façons de créer des objets   
+      // modele
+      class Calculator {
+
+      }
+
+      // objet
+      new Calculator()
+
+    </script>
+
+    <script>
+      // manip JS DOM
+      // let h1Item = document.querySelector('h1');
+      // h1Item.style = 'color: darkblue';
+
+      // Meme chose en 1 ligne
+      document.querySelector('h1').style = 'color: darkblue';
+
+      // document.querySelector(selectorCSS)
+      let items = document.querySelectorAll('li.list-item');
+      for (let item of items) {
+          item.style = 'color: darkblue';
+      }
+    </script>
+  </body>
+</html>

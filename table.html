@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ship To It - Company Packing List</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato: 100,300,400,700|Luckiest+Guy|Oxygen:300,400"
+      rel="stylesheet"
+    />
+    <link href="css/table.css" type="text/css" rel="stylesheet" />
+  </head>
+  <body>
+    <ul class="navigation">
+      <li>
+        <img
+          src="https://content.codecademy.com/courses/web-101/unit-9/htmlcss1-img_logo-shiptoit.png"
+          height="20px;"
+          alt="logo"
+        />
+      </li>
+      <li class="active">Action List</li>
+      <li>Profiles</li>
+      <li>Settings</li>
+    </ul>
+
+    <div class="search">
+      <form>
+        <label for="search-input">Search:</label>
+        <input
+          type="text"
+          id="search-input"
+          name="search-input"
+          placeholder="Type your text"
+        />
+        <input id="search-btn" type="button" value="Search" />
+      </form>
+    </div>
+
+    <table id="data">
+      <thead>
+        <tr>
+          <th scope="col">Company Name</th>
+          <th scope="col">Number of Items to Ship</th>
+          <th scope="col">Next Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Adam’s Greenworks</td>
+          <td>14</td>
+          <td>Package Items</td>
+        </tr>
+        <tr>
+          <td>Davie's Burgers</td>
+          <td>2</td>
+          <td>Send Invoice</td>
+        </tr>
+        <tr>
+          <td>Baker's Bike Shop</td>
+          <td>3</td>
+          <td>Send Invoice</td>
+        </tr>
+        <tr>
+          <td>Miss Sally's Southern</td>
+          <td>4</td>
+          <td>Ship</td>
+        </tr>
+        <tr>
+          <td>Summit Resort Rentals</td>
+          <td>4</td>
+          <td>Ship</td>
+        </tr>
+        <tr>
+          <td>Strike Fitness</td>
+          <td>1</td>
+          <td>Enter Order</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <td>Total</td>
+        <td>28</td>
+        <td></td>
+      </tfoot>
+    </table>
+
+    <script>
+      // je branche le bouton avec js
+      document
+        .querySelector("#search-btn")
+        .addEventListener("click", function () {
+          // récupérer et stocker dans une variable la valeur du champ recherche
+          let searchWord = document.querySelector("#search-input").value;
+
+          // récupère les lignes du tableau
+          let rows = document.querySelectorAll("#data tbody tr");
+
+          // boucle pour parcourir les éléments du tableau
+          for (let row of rows) {
+            // si ma ligne  ne contient pas le texte
+            if (!row.innerText.includes(searchWord)) {
+              row.hidden = true;
+            }
+          }
+        });
+    </script>
+  </body>
+</html>

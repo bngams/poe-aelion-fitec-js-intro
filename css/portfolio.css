@@ -1,0 +1,16 @@
+.x-spacer {
+  flex: 1 1 auto;
+}
+
+.skill-card {
+  margin-bottom: 25px;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+}
+
+.skill-logo {
+  width: 40px;
+}

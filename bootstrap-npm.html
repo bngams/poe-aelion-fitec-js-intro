@@ -177,9 +177,11 @@
 
       // ajouter le conatct dans la page (insérer la div d'un contact avec les infos)
       function ajouterCarteContact(firstname, lastname, email) {
+        const id = Math.random();
+        // const id = generateUniqueHashCode(firstname, lastname, email);
         const contactsList = document.querySelector("#contact-list");
         contactsList.innerHTML += `
-          <div class="card contact-card">
+          <div id="${id}" class="card contact-card">
             <img
               src="https://picsum.photos/300/180"
               class="card-img-top"
@@ -188,10 +190,27 @@
             <div class="card-body">
               <h5 class="card-title">${firstname} ${lastname}</h5>
               <p class="card-text">Email: ${email}</p>
-              <a href="#" class="btn btn-danger">Supprimer</a>
+              <a href="#" class="btn btn-danger" onclick="javascript:supprimerContactParMail('${email}')">Supprimer</a>
             </div>
           </div>
         `;
+      }
+
+      function supprimerContactParMail(email) {
+        // récupérer toutes les cartes contacts
+        const cards = document.querySelectorAll(".contact-card");
+        // parcourir les cartes pour vérifier une par une
+        for (const card of cards) {
+          // si la carte contient le mail à supprimer
+          if (card.textContent.includes(email)) {
+            // supprimer => (la suppression est "fake" ici)
+            card.hidden = true;
+          }
+        }
+      }
+
+      function supprimerContactParId(id) {
+        document.querySelector(id).hidden = true;
       }
     </script>
   </body>

@@ -17,7 +17,7 @@
         <span class="navbar-brand mb-0 h1">Navbar</span>
       </div>
     </nav>
-    <section class="py-5">
+    <section id="contacts" class="py-5">
       <form
         class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-5"
       >
@@ -58,11 +58,15 @@
         </div>
 
         <div class="col-12">
-          <button type="button" class="btn btn-primary">Submit</button>
+          <button id="submitContact" type="button" class="btn btn-primary">
+            Submit
+          </button>
         </div>
       </form>
+
       <div id="contact-list" class="container">
-        <div class="card contact-card">
+        <!-- WE can delete this as the page is dynamic -->
+        <!-- <div class="card contact-card">
           <img
             src="https://picsum.photos/300/180"
             class="card-img-top"
@@ -138,40 +142,56 @@
             <p class="card-text">Email: contact1@email.com</p>
             <a href="#" class="btn btn-danger">Supprimer</a>
           </div>
-        </div>
-
-        <div class="card contact-card">
-          <img
-            src="https://picsum.photos/300/180"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body">
-            <h5 class="card-title">Firstanme Lastname</h5>
-            <p class="card-text">Email: contact1@email.com</p>
-            <a href="#" class="btn btn-danger">Supprimer</a>
-          </div>
-        </div>
+        </div> -->
       </div>
     </section>
     <!-- CHARGER LE JS DE BOOTSTRAP -->
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      //
+      // je branche un "écouteur" sur le bouton #submitContact
+      document
+        .querySelector("#submitContact")
+        .addEventListener("click", function () {
+          ajouterContact();
+        });
+
+      // logique pour récupérer et vérifier les infos du form, puis ajout du contact dans la page
       function ajouterContact() {
         // récupérer les infos du formulaire:
-        const name = document.querySelector("#inputID").value;
-        // ...
-        if (name.length <= 2) {
-          // erreur
+        const firstname = document.querySelector("#firstname").value;
+        const lastname = document.querySelector("#lastname").value;
+        const email = document.querySelector("#email").value;
+
+        // test récupération des infos
+        //console.log(firstname, lastname, email);
+
+        // vérifications
+        // aussi : if (firstname == '' || lastname == '' || email == '') {
+        if (!firstname || !lastname || !email) {
+          alert("Tous les champs sont obligatoires");
         } else {
-          // ajouterCarte(name, ...)
+          ajouterCarteContact(firstname, lastname, email);
         }
       }
 
-      function ajouterCarte(nom, email) {
-        // ...
+      // ajouter le conatct dans la page (insérer la div d'un contact avec les infos)
+      function ajouterCarteContact(firstname, lastname, email) {
+        const contactsList = document.querySelector("#contact-list");
+        contactsList.innerHTML += `
+          <div class="card contact-card">
+            <img
+              src="https://picsum.photos/300/180"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">${firstname} ${lastname}</h5>
+              <p class="card-text">Email: ${email}</p>
+              <a href="#" class="btn btn-danger">Supprimer</a>
+            </div>
+          </div>
+        `;
       }
     </script>
   </body>

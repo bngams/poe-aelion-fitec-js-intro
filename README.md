@@ -24,3 +24,15 @@ Lancer le projet avec la commande
 ```
 npm run start
 ```
+
+## Lancer le server api
+
+
+Lancer le mini serveur api créé à titre d'exemple avec la commande 
+
+```
+npm run api
+```
+
+ou utiliser le fichier db.json avec [json-server](https://github.com/typicode/json-server) en local ou [my-json-server en ligne](https://my-json-server.typicode.com/bngams/poe-aelion-fitec-js-intro/sales)
+

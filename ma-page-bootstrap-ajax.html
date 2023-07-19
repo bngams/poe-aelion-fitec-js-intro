@@ -132,6 +132,7 @@
       
       // articlesJson => Array<Object> 
       function creerArticles(articlesJson) {
+        console.log('articlesJson',articlesJson);
         for (const article of articlesJson) {
           insererArticle(article);
         }

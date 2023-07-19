@@ -156,6 +156,20 @@
           ajouterContact();
         });
 
+      // récupérer les contacts depuis le serveur
+      fetch("https://jsonplaceholder.typicode.com/users") // on recoit un objet Promise<Response> (un objet Promise qui contient un objet Response)
+        .then((res) => res.json()) // dans la variable res, on recoit l'objet Response du Promise (le resultat de la promesse)
+        .then((json) => creerContacts(json));
+
+      // recoit les données json Array<Object>
+      function creerContacts(contactsJson) {
+        console.log("contactsJson", contactsJson);
+        for (const contact of contactsJson) {
+          console.log("contact", contact);
+          insererCarteContact(contact.username, contact.name, contact.email);
+        }
+      }
+
       // logique pour récupérer et vérifier les infos du form, puis ajout du contact dans la page
       function ajouterContact() {
         // récupérer les infos du formulaire:
@@ -171,12 +185,12 @@
         if (!firstname || !lastname || !email) {
           alert("Tous les champs sont obligatoires");
         } else {
-          ajouterCarteContact(firstname, lastname, email);
+          insererCarteContact(firstname, lastname, email);
         }
       }
 
       // ajouter le conatct dans la page (insérer la div d'un contact avec les infos)
-      function ajouterCarteContact(firstname, lastname, email) {
+      function insererCarteContact(firstname, lastname, email) {
         const id = Math.random();
         // const id = generateUniqueHashCode(firstname, lastname, email);
         const contactsList = document.querySelector("#contact-list");
